@@ -166,12 +166,12 @@ public class PersonUI extends JPanel {
                     setFieldData(bean.movePrevious());
                     break;
                 case "Modify..":
-                    if (isEmptyFieldData()) {
+                    if (isEmptyFieldData() || controlData(p) == true) {
                         JOptionPane.showMessageDialog(null,
                                 "Cannot save an empty record");
                         return;
                     }
-                    if (bean.update(p) != null && controlData(p))
+                    if (bean.update(p) != null)
                         JOptionPane.showMessageDialog(null,
                                 "Person modified successfully.");
                     break;
