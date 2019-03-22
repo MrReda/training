@@ -23,7 +23,11 @@ public class PersonUI extends JPanel {
 
     private JButton createButton = new JButton("New..");
     private JButton firstButton = new JButton("First..");
+    private JButton previousButton = new JButton("Previous..");
     private JButton nextButton = new JButton("Next..");
+    private JButton lastButton = new JButton("Last..");
+    private JButton updateButton = new JButton("Update..");
+    private JButton deleteButton = new JButton("Delete..");
     private PersonBean bean = new PersonBean();
 
     public PersonUI() {
@@ -40,11 +44,19 @@ public class PersonUI extends JPanel {
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
         panel.add(createButton);
         panel.add(firstButton);
+        panel.add(previousButton);
         panel.add(nextButton);
+        panel.add(lastButton);
+        panel.add(updateButton);
+        panel.add(deleteButton);
 
         createButton.addActionListener(new ButtonHandler());
         firstButton.addActionListener(new ButtonHandler());
+        previousButton.addActionListener(new ButtonHandler());
         nextButton.addActionListener(new ButtonHandler());
+        lastButton.addActionListener(new ButtonHandler());
+        updateButton.addActionListener(new ButtonHandler());
+        deleteButton.addActionListener(new ButtonHandler());
         return panel;
     }
 
@@ -122,10 +134,37 @@ public class PersonUI extends JPanel {
                     setFieldData(p);
                     createButton.setText("Save");
                     break;
-                     case "First..":
+                    case "First..":
                     setFieldData(bean.moveFirst());
                     break;
+                case "Previous..":
+                    setFieldData(bean.movePrevious());
+                    break;
                 case "Next..":
+                    setFieldData(bean.moveNext());
+                    break;
+                case "Last..":
+                    setFieldData(bean.moveLast());
+                    break;
+                case "Update..":
+                    if (isEmptyFieldData()) {
+                        JOptionPane.showMessageDialog(null,
+                                "Cannot update an empty record");
+                        return;
+                    }
+                    if (bean.update(p) != null)
+                        JOptionPane.showMessageDialog(null,
+                                "Update realized successfully.");
+                    break;
+                case "Delete..":
+                    if (isEmptyFieldData()) {
+                        JOptionPane.showMessageDialog(null,
+                                "Cannot delete an empty record");
+                        return;
+                    }
+                    bean.delete();
+                        JOptionPane.showMessageDialog(null,
+                                "delete realized successfully.");
                     setFieldData(bean.moveNext());
                     break;
                  default:

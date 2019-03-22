@@ -83,7 +83,6 @@ public class PersonBean {
                 }
                 ex.printStackTrace();
             }
-
         }
 
         public Person moveFirst () {
@@ -101,6 +100,7 @@ public class PersonBean {
                 ex.printStackTrace();
             }
             return p;
+
         }
 
         public Person moveLast () {
