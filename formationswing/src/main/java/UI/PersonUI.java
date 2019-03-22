@@ -24,6 +24,10 @@ public class PersonUI extends JPanel {
     private JButton createButton = new JButton("New..");
     private JButton firstButton = new JButton("First..");
     private JButton nextButton = new JButton("Next..");
+    private JButton modifyButton = new JButton("Modify..");
+    private JButton deleteButton = new JButton("Delete..");
+    private JButton lastButton = new JButton("Last..");
+    private JButton previousButton = new JButton("Previous..");
     private PersonBean bean = new PersonBean();
 
     public PersonUI() {
@@ -40,11 +44,21 @@ public class PersonUI extends JPanel {
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
         panel.add(createButton);
         panel.add(firstButton);
+        panel.add(lastButton);
+        panel.add(previousButton);
         panel.add(nextButton);
+        panel.add(modifyButton);
+        panel.add(deleteButton);
 
         createButton.addActionListener(new ButtonHandler());
         firstButton.addActionListener(new ButtonHandler());
         nextButton.addActionListener(new ButtonHandler());
+        modifyButton.addActionListener(new ButtonHandler());
+        deleteButton.addActionListener(new ButtonHandler());
+        lastButton.addActionListener(new ButtonHandler());
+        previousButton.addActionListener(new ButtonHandler());
+
+
         return panel;
     }
 
@@ -79,12 +93,14 @@ public class PersonUI extends JPanel {
     }
 
     private void setFieldData(Person p) {
-        idField.setText(String.valueOf(p.getPersonId()));
-        fNameField.setText(p.getFirstName());
-        mNameField.setText(p.getMiddleName());
-        lNameField.setText(p.getLastName());
-        emailField.setText(p.getEmail());
-        phoneField.setText(p.getPhone());
+
+            idField.setText(String.valueOf(p.getPersonId()));
+            fNameField.setText(p.getFirstName());
+            mNameField.setText(p.getMiddleName());
+            lNameField.setText(p.getLastName());
+            emailField.setText(p.getEmail());
+            phoneField.setText(p.getPhone());
+
     }
 
     private boolean isEmptyFieldData() {
@@ -95,15 +111,30 @@ public class PersonUI extends JPanel {
                 && phoneField.getText().trim().isEmpty());
     }
 
+    // Method checking if the email adress and the phone are correct //
+    private boolean controlData(Person p) {
+        if (!p.getEmail().contains("@")) {
+            JOptionPane.showMessageDialog(null,
+                    "Isn't a valid email !");
+            return true;
+        }
+        if (p.getPhone().length() > 10) {
+            JOptionPane.showMessageDialog(null,
+            "Not a valid phone number !");
+            return true;
+        }
+        return false;
+    }
+
     private class ButtonHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Person p = getFieldData();
             switch (e.getActionCommand()) {
                 case "Save":
-                    if (isEmptyFieldData()) {
+                    if (isEmptyFieldData() || controlData(p) == true) {
                         JOptionPane.showMessageDialog(null,
-                                "Cannot create an empty record");
+                                "Error !");
                         return;
                     }
                     if (bean.create(p) != null)
@@ -122,11 +153,34 @@ public class PersonUI extends JPanel {
                     setFieldData(p);
                     createButton.setText("Save");
                     break;
-                     case "First..":
+                case "First..":
                     setFieldData(bean.moveFirst());
+                    break;
+                case "Last..":
+                    setFieldData(bean.moveLast());
                     break;
                 case "Next..":
                     setFieldData(bean.moveNext());
+                    break;
+                case "Previous..":
+                    setFieldData(bean.movePrevious());
+                    break;
+                case "Modify..":
+                    if (isEmptyFieldData()) {
+                        JOptionPane.showMessageDialog(null,
+                                "Cannot save an empty record");
+                        return;
+                    }
+                    if (bean.update(p) != null && controlData(p))
+                        JOptionPane.showMessageDialog(null,
+                                "Person modified successfully.");
+                    break;
+                case "Delete..":
+                    bean.delete();
+                    JOptionPane.showMessageDialog(null,
+                                    "Person deleted successfully.");
+                    setFieldData(bean.movePrevious());
+
                     break;
                  default:
                     JOptionPane.showMessageDialog(null,
