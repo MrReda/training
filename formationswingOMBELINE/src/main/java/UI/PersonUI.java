@@ -131,8 +131,8 @@ public class PersonUI extends JPanel {
                     createButton.setText("New..");
                     break;
                 case "New..":
-                   // p.setPersonId(new Random()
-                          //  .nextInt(Integer.MAX_VALUE) + 1);
+                    p.setPersonId(new Random()
+                    .nextInt(Integer.MAX_VALUE) + 1);
                     p.setFirstName("");
                     p.setMiddleName("");
                     p.setLastName("");
