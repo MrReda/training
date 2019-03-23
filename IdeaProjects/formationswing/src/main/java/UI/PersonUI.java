@@ -138,13 +138,13 @@ public class PersonUI extends JPanel {
                         bean.update(p);
                         setFieldData(bean.moveNext());
                         JOptionPane.showMessageDialog(null,
-                                "la personne a ete bien modiffier");
+                                "Record updated successfully");
                        break;
                     case "Delete..":
                         setFieldData(bean.moveNext());
                  bean.delete();
                         JOptionPane.showMessageDialog(null,
-                                "la personne a bien ete supprimer");
+                                "Record deleted successfully");
                     break;
 
 
