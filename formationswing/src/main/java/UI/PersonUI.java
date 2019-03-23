@@ -113,17 +113,12 @@ public class PersonUI extends JPanel {
 
     // Method checking if the email adress and the phone are correct //
     private boolean controlData(Person p) {
-        if (!p.getEmail().contains("@")) {
+        //Utilise plutôt une expression régulière !!,ceci n'est pas suffisant pour verifier un email!
+        if (!p.getEmail().contains("@") || p.getPhone().length() > 10) {
             JOptionPane.showMessageDialog(null,
-                    "Isn't a valid email !");
+                    "It's not a valid email or phone !");
             return true;
         }
-        if (p.getPhone().length() > 10) {
-            JOptionPane.showMessageDialog(null,
-            "Not a valid phone number !");
-            return true;
-        }
-        return false;
     }
 
     private class ButtonHandler implements ActionListener {
