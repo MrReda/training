@@ -154,7 +154,7 @@ public class PersonUI extends JPanel {
                     }
                     if (bean.update(p) != null)
                         JOptionPane.showMessageDialog(null,
-                                "Update realized successfully.");
+                                "Record updated successfully.");
                     break;
                 case "Delete..":
                     if (isEmptyFieldData()) {
@@ -164,7 +164,7 @@ public class PersonUI extends JPanel {
                     }
                     bean.delete();
                         JOptionPane.showMessageDialog(null,
-                                "delete realized successfully.");
+                                "Record deleted successfully.");
                     setFieldData(bean.moveNext());
                     break;
                  default:
