@@ -21,7 +21,7 @@ public class PersonUI extends JPanel {
     private JTextField phoneField = new JTextField(30);
     private JTextField emailField = new JTextField(30);
 
-    private JButton createButton = new JButton("New");
+    private JButton createButton = new JButton("New..");
     private JButton firstButton = new JButton("First..");
     private JButton lastButton = new JButton("Last..");
     private JButton nextButton = new JButton("Next..");
@@ -110,7 +110,7 @@ public class PersonUI extends JPanel {
         public void actionPerformed(ActionEvent e) {
             Person p = getFieldData();
             switch (e.getActionCommand()) {
-                case "SAVE":
+                case "SAVE..":
                     if (isEmptyFieldData()) {
                         JOptionPane.showMessageDialog(null,
                                 "Cannot create an empty record");
@@ -119,9 +119,9 @@ public class PersonUI extends JPanel {
                     if (bean.create(p) != null)
                         JOptionPane.showMessageDialog(null,
                                 "New person created successfully.");
-                    createButton.setText("New");
+                    createButton.setText("New..");
                     break;
-                case "New":
+                case "New..":
                     p.setPersonId(new Random()
                             .nextInt(Integer.MAX_VALUE) + 1);
                     p.setFirstName("");
@@ -146,12 +146,12 @@ public class PersonUI extends JPanel {
                 case "Delete..":
                     if (isEmptyFieldData()) {
                         JOptionPane.showMessageDialog(null,
-                                "This person is not delete");
+                                "This person is not deleted");
                         return;
                     }
                     if (bean.delete(p) != null)
                         JOptionPane.showMessageDialog(null,
-                                "This person is delete successfully.");
+                                "This person is deleted successfully.");
                     deleteButton.setText("Delete..");
                     setFieldData(bean.moveNext());
 
@@ -160,12 +160,12 @@ public class PersonUI extends JPanel {
                 case "Update..":
                     if (isEmptyFieldData()) {
                         JOptionPane.showMessageDialog(null,
-                                "This person is not update");
+                                "This person is not updated");
                         return;
                     }
                     if (bean.update(p) != null)
                         JOptionPane.showMessageDialog(null,
-                                "This person is update successfully.");
+                                "This person is updated successfully.");
                     updateButton.setText("Update..");
                     break;
 
