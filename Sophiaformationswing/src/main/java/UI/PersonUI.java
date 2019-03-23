@@ -160,8 +160,9 @@ public class PersonUI extends JPanel {
                         return;
                     }
                     if (bean.update(p) != null)
-                        JOptionPane.showMessageDialog(null,
-                                "Update realized successfully.");
+                        JOptionPane.showMessageDialog(
+                                null, "Person with ID:" + String.valueOf(p.getPersonId()
+                                        + " is updated successfully"));
                     break;
                 case "Delete..":
                     if (isEmptyFieldData()) {
@@ -170,8 +171,10 @@ public class PersonUI extends JPanel {
                         return;
                     }
                     bean.delete();
-                    JOptionPane.showMessageDialog(null,
-                            "delete realized successfully.");
+                     JOptionPane.showMessageDialog(
+                            null, "Person with ID:"
+                                    + String.valueOf(p.getPersonId()
+                                    + " is deleted successfully"));
                     setFieldData(bean.moveNext());
                     break;
                 default:
